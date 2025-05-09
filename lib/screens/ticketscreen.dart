@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TicketScreen extends StatelessWidget {
+  const TicketScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My Tickets')),
-      body: Center(child: Text('Ticket Screen Content')),
+      appBar: AppBar(title: const Text('My Tickets')),
+      body: const Center(child: Text('Ticket Screen Content')),
     );
   }
 }

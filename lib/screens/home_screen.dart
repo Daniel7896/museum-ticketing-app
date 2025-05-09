@@ -9,6 +9,8 @@ import 'package:museum_ticketing_app/screens/profile_screen.dart';
 import 'package:museum_ticketing_app/screens/exhibition_detail_screen.dart';  // New import for ExhibitionDetailScreen
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // All tab pages used in PageView
   final List<Widget> _pages = [
-    HomePageContent(),       // Home tab content
-    ExploreScreen(),         // Explore screen
+    const HomePageContent(),       // Home tab content
+    const ExploreScreen(),         // Explore screen
     HistoryScreen(),         // History screen
-    ProfileScreen(),         // Profile screen
+    const ProfileScreen(),         // Profile screen
   ];
 
   // Handle tab change from bottom nav
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: _selectedIndex == 0 ? _buildAppBar() : null, // Only show AppBar on Home tab
       body: PageView(
         controller: _pageController,
-        physics: NeverScrollableScrollPhysics(), // Prevent swiping tabs
+        physics: const NeverScrollableScrollPhysics(), // Prevent swiping tabs
         children: _pages,
       ),
       floatingActionButton:
@@ -49,16 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
   // Top AppBar with Logo and Title
   AppBar _buildAppBar() {
     return AppBar(
+      backgroundColor: const Color(0xFF5C6BC0), // Deep blue background color
       title: Row(
         children: [
           SvgPicture.asset('assets/images/logo.svg', height: 30),
-          SizedBox(width: 10),
-          Text('Tamil Nadu Museum',
-              style: TextStyle(fontFamily: 'Tamil', fontSize: 18)),
+          const SizedBox(width: 10),
+          const Text('Tamil Nadu Museum',
+              style: TextStyle(fontFamily: 'Tamil', fontSize: 18, color: Colors.white)),
         ],
       ),
       actions: [
-        IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
+        IconButton(icon: const Icon(Icons.notifications, color: Colors.white), onPressed: () {}),
       ],
     );
   }
@@ -69,8 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.amber[800],
-      items: [
+      selectedItemColor: Colors.amber[700],
+      unselectedItemColor: Colors.grey[600],
+      backgroundColor: const Color(0xFF3F51B5), // Deep blue background
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
         BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
@@ -83,9 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildChatbotButton(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Colors.amber[700],
-      child: Icon(Icons.chat, color: Colors.white),
+      child: const Icon(Icons.chat, color: Colors.white),
       onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (_) => ChatbotScreen())),
+          context, MaterialPageRoute(builder: (_) => const ChatbotScreen())),
     );
   }
 }
@@ -96,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
 // --------------------
 
 class HomePageContent extends StatelessWidget {
+  const HomePageContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -114,13 +121,13 @@ class HomePageContent extends StatelessWidget {
   Widget _buildCulturalBanner() {
     return Container(
       height: 180,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/banner.jpg'),
           fit: BoxFit.cover,
         ),
       ),
-      child: Center(
+      child: const Center(
         child: Text('Welcome!',
             style: TextStyle(
                 fontFamily: 'Tamil',
@@ -134,13 +141,13 @@ class HomePageContent extends StatelessWidget {
   // Quick action buttons like Tickets, History, Guide
   Widget _buildQuickActions(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildActionButton(Icons.confirmation_num, 'Tickets',
               () => Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => BookingScreen()))),
+                  MaterialPageRoute(builder: (_) => const BookingScreen()))),
           _buildActionButton(Icons.history, 'History', () {}),
           _buildActionButton(Icons.audio_file, 'Guide', () {}),
         ],
@@ -158,17 +165,17 @@ class HomePageContent extends StatelessWidget {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: Colors.amber[700],
+              color: const Color(0xFF5C6BC0), // Deep blue for buttons
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Colors.black26, blurRadius: 4, offset: Offset(2, 2))
               ],
             ),
             child: Icon(icon, color: Colors.white, size: 30),
           ),
-          SizedBox(height: 8),
-          Text(label, style: TextStyle(fontFamily: 'Tamil')),
+          const SizedBox(height: 8),
+          Text(label, style: const TextStyle(fontFamily: 'Tamil', color: Colors.black)),
         ],
       ),
     );
@@ -196,17 +203,18 @@ class HomePageContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text('Current Exhibitions',
               style: TextStyle(
                   fontFamily: 'Tamil',
                   fontSize: 18,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF3F51B5))), // Deep blue color
         ),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: exhibitions.length,
           itemBuilder: (ctx, index) =>
               _buildExhibitionCard(exhibitions[index], context), // Pass context to the card
@@ -234,7 +242,7 @@ class HomePageContent extends StatelessWidget {
       },
       child: Card(
         elevation: 4,
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: ClipRRect(
@@ -245,11 +253,14 @@ class HomePageContent extends StatelessWidget {
                 height: 50,
                 fit: BoxFit.cover),
           ),
-          title: Text(exhibition['title'] ?? 'No Title'),
-          subtitle: Text(exhibition['location'] ?? 'Unknown Location'),
+          title: Text(exhibition['title'] ?? 'No Title',
+              style: const TextStyle(fontFamily: 'Tamil', fontSize: 16)),
+          subtitle: Text(exhibition['location'] ?? 'Unknown Location',
+              style: TextStyle(fontFamily: 'Tamil', color: Colors.grey[600])),
           trailing: Chip(
-            backgroundColor: Colors.amber[700],
-            label: Text(exhibition['price'] ?? 'No Price'),
+            backgroundColor: const Color(0xFF5C6BC0), // Deep blue chip color
+            label: Text(exhibition['price'] ?? 'No Price',
+                style: const TextStyle(color: Colors.white)),
           ),
         ),
       ),
@@ -259,17 +270,18 @@ class HomePageContent extends StatelessWidget {
   // Horizontal scroll of museum highlight items
   Widget _buildMuseumHighlights() {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Museum Highlights',
+          const Text('Museum Highlights',
               style: TextStyle(
                   fontFamily: 'Tamil',
                   fontSize: 18,
-                  fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
-          Container(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF3F51B5))), // Deep blue color
+          const SizedBox(height: 10),
+          SizedBox(
             height: 150,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -277,9 +289,9 @@ class HomePageContent extends StatelessWidget {
                 _buildHighlightItem(
                     'assets/images/highlight1.jpg', 'Ancient Coins'),
                 _buildHighlightItem(
-                    'assets/images/highlight2.jpg', 'Stone Sculptures'),
+                    'assets/images/highlight2.jpg', 'Temple Sculptures'),
                 _buildHighlightItem(
-                    'assets/images/highlight3.jpg', 'Bronze Artifacts'),
+                    'assets/images/highlight3.jpg', 'Historical Manuscripts'),
               ],
             ),
           ),
@@ -288,19 +300,23 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
-  // Individual museum highlight item
+  // Single museum highlight item
   Widget _buildHighlightItem(String imagePath, String title) {
-    return Padding(
-      padding: EdgeInsets.only(right: 10),
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.only(right: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(imagePath,
-                width: 120, height: 100, fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(imagePath, width: 120, height: 120, fit: BoxFit.cover),
           ),
-          SizedBox(height: 5),
-          Text(title, style: TextStyle(fontFamily: 'Tamil')),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(title,
+                style: const TextStyle(fontFamily: 'Tamil', fontSize: 14, fontWeight: FontWeight.bold)),
+          ),
         ],
       ),
     );

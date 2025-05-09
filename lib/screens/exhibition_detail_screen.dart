@@ -7,7 +7,7 @@ class ExhibitionDetailScreen extends StatelessWidget {
   final String image;
 
   // Constructor to accept data when navigating to this screen
-  ExhibitionDetailScreen({
+  const ExhibitionDetailScreen({super.key, 
     required this.title,
     required this.location,
     required this.description,
@@ -30,12 +30,12 @@ class ExhibitionDetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(image, width: double.infinity, height: 250, fit: BoxFit.cover),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               location,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(description),
           ],
         ),

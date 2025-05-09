@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
         backgroundColor: Colors.amber[700],
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {
               // You can add navigation to an edit profile screen if required.
             },
@@ -17,21 +19,21 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Image
-            Center(
+            const Center(
               child: CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/images/profile_picture.jpg'), // Update with your profile image
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // User Name
-            Center(
+            const Center(
               child: Text(
                 "John Doe", // Replace with dynamic user data
                 style: TextStyle(
@@ -41,19 +43,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             // User Information
-            Text(
+            const Text(
               "Email: johndoe@example.com", // Replace with dynamic email
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               "Phone: +1 234 567 890", // Replace with dynamic phone number
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Action Buttons (e.g., View Past Bookings, Settings, etc.)
             _buildActionButton(context, Icons.history, "Booking History", () {
@@ -78,10 +80,10 @@ class ProfileScreen extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, color: Colors.amber[700], size: 24),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
